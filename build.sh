@@ -257,7 +257,7 @@ build_prepare
 build_package
 build_test
 build_install
-build_install_test
+#build_install_test
 module_install
 
 log_success ">>>\n>>> done.\n>>>"

@@ -1,0 +1,36 @@
+#!/bin/bash
+#
+# This file is part of Builder.
+#
+# Builder is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Builder is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Builder.  If not, see <https://www.gnu.org/licenses/>.
+#
+
+URL="https://github.com/nest/nest-simulator/archive/refs/tags/v3.2.tar.gz"
+# URL="https://zenodo.org/record/4739103/files/nest-simulator-${VERSION}.tar.gz"
+# MD5SUM=5f369b65512bbb9a7031529ed18776e4
+# SHA256SUM=d481ea67f3251fe3aadf5252ab0a999172f0cd5536c5985366d271d772e686e6
+
+module load Stages/2022
+module load Python/3.9.6
+module load SciPy-Stack
+module load GCC/11.2.0
+module load ParaStationMPI/5.5.0-1
+module load GSL/2.7
+module load jemalloc/5.2.1
+module load Boost/1.78.0
+module load JUBE/2.4.2
+module load CMake/3.21.1
+
+CONFIGURE_OPTIONS="-Dwith-mpi=ON -DCMAKE_CXX_COMPILER=mpic++ -DCMAKE_C_COMPILER=mpicc -Dwith-python=ON -Dwith-ltdl=OFF -Dwith-boost=ON"
+source "$(dirname "${PLAN}")/../common"

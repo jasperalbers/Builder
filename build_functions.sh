@@ -247,38 +247,38 @@ module_install () {
 		log_status ">>> installing module file to ${module_path}"
 		mkdir -pv "$(dirname "${module_path}")"
 		module="$(cat "${PLAN}.module")"
-		if version_gt $BASH_VERSION 4.4; then
-			echo -e "${module@P}" >"${module_path}"
-		else
-			# this is a bad substitute for the power of the bash>4.4 notation.
-			echo "${module}" | sed \
-			    -e 's%\\\$%__NOT_BUILDER_DOLLAR__%g' \
-			    -e "s%\${\?AUTOMATIC_BUILD_WARNING}\?%$AUTOMATIC_BUILD_WARNING%g" \
-			    -e "s%\${\?BUILDER_PATH}\?%$BUILDER_PATH%g" \
-			    -e "s%\${\?PLANFILE_PATH}\?%$PLANFILE_PATH%g" \
-			    -e "s%\${\?PACKAGE_CACHE}\?%$PACKAGE_CACHE%g" \
-			    -e "s%\${\?SOURCE_PATH}\?%$SOURCE_PATH%g" \
-			    -e "s%\${\?BUILD_PATH}\?%$BUILD_PATH%g" \
-			    -e "s%\${\?TARGET_PATH}\?%$TARGET_PATH%g" \
-			    -e "s%\${\?MODULE_INSTALL_PATH}\?%$MODULE_INSTALL_PATH%g" \
-			    -e "s%\${\?LOG_PATH}\?%$LOG_PATH%g" \
-			    -e "s%\${\?PACKAGE}\?%$PACKAGE%g" \
-			    -e "s%\${\?VERSION}\?%$VERSION%g" \
-			    -e "s%\${\?VARIANT}\?%$VARIANT%g" \
-			    -e "s%\${\?PLAN}\?%$PLAN%g" \
-			    -e "s%\${\?SOURCE}\?%$SOURCE%g" \
-			    -e "s%\${\?TARGET}\?%$TARGET%g" \
-			    -e "s%\${\?BUILD}\?%$BUILD%g" \
-			    -e "s%\${\?LOG}\?%$LOG%g" \
-			    -e "s%\${\?PREREQ_DEPENDS}\?%$PREREQ_DEPENDS%g" \
-			    -e "s%\${\?VIRTUAL_ENV}\?%${VIRTUAL_ENV:-/}%g" \
-			    -e 's%__NOT_BUILDER_DOLLAR__%$%g' \
-			       > "${module_path}"
-			    #-e "s%\${\?PYTHON_SCRIPTS}\?%$PYTHON_SCRIPTS%g" \
-			    #-e "s%\${\?PYTHON_PLATLIB}\?%$PYTHON_PLATLIB%g" \
-			    #-e "s%\${\?PYTHON_PURELIB}\?%$PYTHON_PURELIB%g" \
-			    #-e "s%\${\?PYTHON_SITEPKG}\?%$PYTHON_SITEPKG%g" \
-		fi
+		# if version_gt $BASH_VERSION 4.4; then
+		# 	echo -e "${module@P}" >"${module_path}"
+		# else
+		# this is a bad substitute for the power of the bash>4.4 notation.
+		echo "${module}" | sed \
+		    -e 's%\\\$%__NOT_BUILDER_DOLLAR__%g' \
+		    -e "s%\${\?AUTOMATIC_BUILD_WARNING}\?%$AUTOMATIC_BUILD_WARNING%g" \
+		    -e "s%\${\?BUILDER_PATH}\?%$BUILDER_PATH%g" \
+		    -e "s%\${\?PLANFILE_PATH}\?%$PLANFILE_PATH%g" \
+		    -e "s%\${\?PACKAGE_CACHE}\?%$PACKAGE_CACHE%g" \
+		    -e "s%\${\?SOURCE_PATH}\?%$SOURCE_PATH%g" \
+		    -e "s%\${\?BUILD_PATH}\?%$BUILD_PATH%g" \
+		    -e "s%\${\?TARGET_PATH}\?%$TARGET_PATH%g" \
+		    -e "s%\${\?MODULE_INSTALL_PATH}\?%$MODULE_INSTALL_PATH%g" \
+		    -e "s%\${\?LOG_PATH}\?%$LOG_PATH%g" \
+		    -e "s%\${\?PACKAGE}\?%$PACKAGE%g" \
+		    -e "s%\${\?VERSION}\?%$VERSION%g" \
+		    -e "s%\${\?VARIANT}\?%$VARIANT%g" \
+		    -e "s%\${\?PLAN}\?%$PLAN%g" \
+		    -e "s%\${\?SOURCE}\?%$SOURCE%g" \
+		    -e "s%\${\?TARGET}\?%$TARGET%g" \
+		    -e "s%\${\?BUILD}\?%$BUILD%g" \
+		    -e "s%\${\?LOG}\?%$LOG%g" \
+		    -e "s%\${\?PREREQ_DEPENDS}\?%$PREREQ_DEPENDS%g" \
+		    -e "s%\${\?VIRTUAL_ENV}\?%${VIRTUAL_ENV:-/}%g" \
+		    -e 's%__NOT_BUILDER_DOLLAR__%$%g' \
+		       > "${module_path}"
+		    #-e "s%\${\?PYTHON_SCRIPTS}\?%$PYTHON_SCRIPTS%g" \
+		    #-e "s%\${\?PYTHON_PLATLIB}\?%$PYTHON_PLATLIB%g" \
+		    #-e "s%\${\?PYTHON_PURELIB}\?%$PYTHON_PURELIB%g" \
+		    #-e "s%\${\?PYTHON_SITEPKG}\?%$PYTHON_SITEPKG%g" \
+		# fi
 		if ! echo "${MODULEPATH:-}" | grep "${MODULE_INSTALL_PATH}" >/dev/null; then
 			log_info ">>>"
 			log_info ">>> Info: MODULE_INSTALL_PATH is not in your MODULEPATH"
